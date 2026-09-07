@@ -4,6 +4,7 @@ import 'package:api_flutter/news_model.dart';
 import 'package:api_flutter/newsdetailpage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Newsapp extends StatefulWidget {
   const Newsapp({super.key});
@@ -38,8 +39,10 @@ class _NewsappState extends State<Newsapp> {
   }
 
   Future<News_Model> fetchNews({String? pageToken}) async {
+    final apiKey = dotenv.env['API_KEY'] ?? '';
+
     String url =
-        "https://newsdata.io/api/1/latest?apikey=pub_6b6bc61cd8b54a8193dcd3a99ade10b0&category=business";
+        "https://newsdata.io/api/1/latest?apikey=$apiKey&category=business";
 
     if (pageToken != null) {
       url += "&page=$pageToken";
